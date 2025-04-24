@@ -33,7 +33,7 @@ export const registerUser = async (req, res) => {
         return res.status(200).json({
             message:"user registered success",
             user,
-            success:true
+            success:true 
         })
         
     } catch (error) {
@@ -68,9 +68,9 @@ export const loginUser= async (req,res)=>{
                 success:false
             })
         }
-        const isPasswordMatch = bcrypt.compare(password,user.password) 
+        const isPasswordMatch =  await bcrypt.compare(password,user.password) 
         if(!isPasswordMatch){
-            return res.status(401).josn({
+            return res.status(401).json({
                     message:"invalid credentials",
                     success:false
             })
@@ -79,7 +79,7 @@ export const loginUser= async (req,res)=>{
                 email:user.email,
                 id:user.id
             }
-        const token =jwt.sign(forTokenData,process.env.JWT_SECRET_KEY,{
+        const token = await  jwt.sign(forTokenData,process.env.JWT_SECRET_KEY,{
             expiresIn:"1d"
         })
 

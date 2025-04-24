@@ -35,7 +35,7 @@ const navigate=useNavigate()
     
    } catch (error) {
     console.log(error)
-    toast.error("something went wrong ")
+    toast.error(error.response.data.message)
 
    }finally{
     setIsSubmitting(false)
